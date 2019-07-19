@@ -32,6 +32,7 @@ public class AdminBoxsController {
 	public String getByBoxId(@RequestParam("boxId") String boxId){
 		try{
 			Object object = redisTemplate.opsForValue().get(boxId);
+			System.out.println(11);
 			if (object != null) {
 				return object.toString();
 			}

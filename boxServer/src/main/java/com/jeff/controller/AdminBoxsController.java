@@ -32,16 +32,14 @@ public class AdminBoxsController {
 	 * @param boxId
 	 */
 	@GetMapping(value = "/getByBoxId")
-	public String getByBoxId(@RequestParam("boxId") String boxId){
+	public Object getByBoxId(@RequestParam("boxId") String boxId){
+		Object object = null;
 		try{
-			Object object = redisUtils.get(boxId);
-			if (object != null) {
-				return object.toString();
-			}
+			object = redisUtils.get(boxId);
 		}catch (Exception e){
 			logger.error("服务器错误", e.fillInStackTrace());
 		}
-		return "";
+		return object;
 	}
 
 

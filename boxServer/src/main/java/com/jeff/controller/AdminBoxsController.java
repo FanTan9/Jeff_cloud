@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @Created by: tangfan
  * @version: 1.0.0
  */
-@RestController
+@RestController()
+@RequestMapping(value = "/boxservice")
 public class AdminBoxsController {
 
 
@@ -29,7 +31,7 @@ public class AdminBoxsController {
 	 * @Desciption: 从redis通过boxId获取数据
 	 * @param boxId
 	 */
-	@GetMapping(value = "/boxservice/getByBoxId")
+	@GetMapping(value = "/getByBoxId")
 	public String getByBoxId(@RequestParam("boxId") String boxId){
 		try{
 			Object object = redisUtils.get(boxId);
@@ -41,4 +43,6 @@ public class AdminBoxsController {
 		}
 		return "";
 	}
+
+
 }

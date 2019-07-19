@@ -25,12 +25,23 @@ public class AdminBoxs implements Serializable {
     @TableField(value = "state")
     private Integer status;
 
+    @TableField(value = "mac")
+    private String mac;
+
     @Override
     public String toString() {
         return "adminBoxs{" +
                 "boxId=" + boxId +
                 ", status=" + status +
                 '}';
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
     }
 
     public Integer getBoxId() {

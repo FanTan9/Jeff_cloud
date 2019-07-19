@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Classname: RedisUtils
  * @PackageName: com.jeff.utill
- * @Description: TODO
+ * @Description:
  * @Date: 2019/7/19 11:17
  * @Created by: tangfan
  * @version: 1.0.0

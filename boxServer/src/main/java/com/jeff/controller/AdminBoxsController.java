@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version: 1.0.0
  */
 @RestController
-public class ScenePlayStatusController {
+public class AdminBoxsController {
 
 	@Autowired
 	private RedisTemplate redisTemplate;

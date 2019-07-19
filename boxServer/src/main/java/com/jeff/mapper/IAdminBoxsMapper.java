@@ -1,7 +1,7 @@
 package com.jeff.mapper;
 
 import com.jeff.base.ICommonMapper;
-import com.jeff.pojo.AdminBoxs;
+import com.jeff.pojo.adminBoxs.AdminBoxs;
 import org.springframework.stereotype.Repository;
 
 /**

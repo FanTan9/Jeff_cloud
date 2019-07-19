@@ -2,7 +2,7 @@ package com.jeff.service.rabbitService;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.jeff.pojo.AdminBoxs;
+import com.jeff.pojo.adminBoxs.AdminBoxs;
 import com.jeff.pojo.SceneMsg;
 import com.jeff.service.adminBoxs.IAdminBoxsService;
 import org.apache.commons.lang.StringUtils;

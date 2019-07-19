@@ -2,7 +2,7 @@ package com.jeff.service.adminBoxs;
 
 import com.jeff.base.CommServiceImpl;
 import com.jeff.mapper.IAdminBoxsMapper;
-import com.jeff.pojo.AdminBoxs;
+import com.jeff.pojo.adminBoxs.AdminBoxs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

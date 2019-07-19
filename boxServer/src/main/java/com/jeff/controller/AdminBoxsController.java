@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Classname: ScenePlayStatusController
+ * @Classname: AdminBoxsController
  * @PackageName: com.jeff.controller
  * @Description: 场景改变Controller
  * @Date: 2019/7/16 11:38

@@ -1,4 +1,4 @@
-package com.jeff.pojo;
+package com.jeff.pojo.adminBoxs;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
 /**
- * @Classname: AdminBoxs
+ * @Classname: adminBoxs
  * @PackageName: com.jeff.pojo
  * @Description: 盒子实体类，字段不全
  * @Date: 2019/7/15 11:13
@@ -27,7 +27,7 @@ public class AdminBoxs implements Serializable {
 
     @Override
     public String toString() {
-        return "AdminBoxs{" +
+        return "adminBoxs{" +
                 "boxId=" + boxId +
                 ", status=" + status +
                 '}';

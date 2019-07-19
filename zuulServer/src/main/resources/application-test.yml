@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9070/eureka/
+server:
+  port: 8801
+zuul:
+  routes:
+    api-1:
+      path: /api-client1/**
+      serviceId: feign-Server1
+    api-2:
+      path: /api-client2/**
+      serviceId: feign-Server1
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+      

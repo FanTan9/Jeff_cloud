@@ -1,0 +1,17 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  flyway:
+    baseline-on-migrate: true
+  profiles:
+    active: @profileActive@
+  application:
+    name: moveJ1Status-Server
+management:
+  security:
+    enabled: false
+
+

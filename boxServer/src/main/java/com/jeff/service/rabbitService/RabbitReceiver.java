@@ -2,9 +2,10 @@ package com.jeff.service.rabbitService;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.jeff.pojo.adminBoxs.AdminBoxs;
 import com.jeff.pojo.SceneMsg;
+import com.jeff.pojo.adminBoxs.AdminBoxs;
 import com.jeff.service.adminBoxs.IAdminBoxsService;
+import com.jeff.utill.RedisUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +31,7 @@ public class RabbitReceiver {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisUtils redisUtils;
 
     @Autowired
     private IAdminBoxsService adminBoxsService;
@@ -93,9 +93,9 @@ public class RabbitReceiver {
      * @param：SceneMsg
      */
     private boolean saveScenMsg(SceneMsg sceneMsg){
-        redisTemplate.opsForValue().set(sceneMsg.getBoxId(), sceneMsg.toString());
+        redisUtils.put(sceneMsg.getBoxId(), sceneMsg.toString());
         boolean bool = StringUtils.equals(sceneMsg.toString()
-                , redisTemplate.opsForValue().get(sceneMsg.getBoxId()).toString());
+                , redisUtils.get(sceneMsg.getBoxId()).toString());
         return bool;
     }
 
@@ -105,9 +105,9 @@ public class RabbitReceiver {
      * @return
      */
     private boolean saveScenMsg(String boxId, String msg){
-        redisTemplate.opsForValue().set(boxId, msg);
+        redisUtils.put(boxId, msg);
         boolean bool = StringUtils.equals(msg
-                , redisTemplate.opsForValue().get(boxId).toString());
+                , redisUtils.get(boxId).toString());
         return bool;
     }
 }

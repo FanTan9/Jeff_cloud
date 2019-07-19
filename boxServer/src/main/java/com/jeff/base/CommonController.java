@@ -20,9 +20,16 @@ public class CommonController<T> {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    public Map<String, Object> success(Boolean bool, String msg, Object data){
+    /**
+     * 返回模板
+     * @param code 返回代码
+     * @param msg   返回消息
+     * @param data  返回数据
+     * @return
+     */
+    public Map<String, Object> callback(Integer code, String msg, Object data){
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("success", bool);
+        map.put("code", code);
         map.put("msg", msg);
         map.put("data", data);
         return map;

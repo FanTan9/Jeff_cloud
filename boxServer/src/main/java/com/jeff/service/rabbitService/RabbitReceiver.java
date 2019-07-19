@@ -59,29 +59,6 @@ public class RabbitReceiver {
         }
     }
 
-   /* *//**
-     * @Description 订阅队列：onlineboxes消息，数据库中改变盒子上线离线状态
-     * @param message
-     *//*
-    @RabbitListener(queues = "cxs")
-    public void test(@Payload Message message) {
-        byte[] messageBody = message.getBody();
-        String msg = "";
-        try{
-            msg = new String(messageBody);
-            logger.info("监听到消息:" + msg);
-            AdminBoxs adminBoxs = new Gson().fromJson(msg, AdminBoxs.class);
-            boolean bool = this.saveMessage(adminBoxs);
-            if(bool == true){
-                logger.info("消息修改成功:" + msg);
-            }
-        } catch (JsonSyntaxException | NumberFormatException e){
-            logger.error("格式错误:" + msg, e.getMessage());
-        } catch (Exception e){
-            logger.error("监听消息出现异常", e.fillInStackTrace());
-        }
-    }*/
-
     /**
      * @Desciption 订阅队列：playstatus消息，消息存入redis中
      * @param message
@@ -102,7 +79,6 @@ public class RabbitReceiver {
             logger.error("监听消息出现异常", e.fillInStackTrace());
         }
     }
-
 
     /***
      * 将消息存入数据库

@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @Classname: AdminBoxsController
  * @PackageName: com.jeff.controller
- * @Description: 场景改变Controller
+ * @Description: admin_boxs controller
  * @Date: 2019/7/16 11:38
  * @Created by: tangfan
  * @version: 1.0.0
  */
 @RestController
 public class AdminBoxsController {
-
 
 
 	@Autowired
@@ -30,7 +29,7 @@ public class AdminBoxsController {
 	 * @Desciption: 从redis通过boxId获取数据
 	 * @param boxId
 	 */
-	@GetMapping(value = "/getByBoxId")
+	@GetMapping(value = "/boxservice/getByBoxId")
 	public String getByBoxId(@RequestParam("boxId") String boxId){
 		try{
 			Object object = redisUtils.get(boxId);

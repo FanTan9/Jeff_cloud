@@ -1,26 +1,29 @@
 package com.jeff.controller;
 
+import com.jeff.utill.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Classname: AdminBoxsController
  * @PackageName: com.jeff.controller
- * @Description: 场景改变Controller
+ * @Description: admin_boxs controller
  * @Date: 2019/7/16 11:38
  * @Created by: tangfan
  * @version: 1.0.0
  */
-@RestController
+@RestController()
+@RequestMapping(value = "/boxservice")
 public class AdminBoxsController {
 
+
 	@Autowired
-	private RedisTemplate redisTemplate;
+	private RedisUtils redisUtils;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -31,8 +34,7 @@ public class AdminBoxsController {
 	@GetMapping(value = "/getByBoxId")
 	public String getByBoxId(@RequestParam("boxId") String boxId){
 		try{
-			System.out.println(22);
-			Object object = redisTemplate.opsForValue().get(boxId);
+			Object object = redisUtils.get(boxId);
 			if (object != null) {
 				return object.toString();
 			}
@@ -41,4 +43,6 @@ public class AdminBoxsController {
 		}
 		return "";
 	}
+
+
 }

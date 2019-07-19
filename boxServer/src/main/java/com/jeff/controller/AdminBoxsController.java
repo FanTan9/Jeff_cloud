@@ -1,6 +1,12 @@
 package com.jeff.controller;
 
+import com.jeff.base.CommonController;
+import com.jeff.base.constant.CallbackMsg;
+import com.jeff.pojo.adminBoxs.AdminBoxs;
+import com.jeff.pojo.adminBoxs.AdminBoxsMacVO;
+import com.jeff.service.adminBoxs.IAdminBoxsService;
 import com.jeff.utill.RedisUtils;
+import com.jeff.utill.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController()
 @RequestMapping(value = "/boxservice")
-public class AdminBoxsController {
+public class AdminBoxsController extends CommonController {
 
 
 	@Autowired
 	private RedisUtils redisUtils;
+
+	@Autowired
+	private IAdminBoxsService adminBoxsService;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -42,5 +51,26 @@ public class AdminBoxsController {
 		return object;
 	}
 
-
+	/**
+	 *
+	 * @return
+	 */
+	@GetMapping(value = "/verificationMac")
+	public Object verificationMac(AdminBoxsMacVO adminBoxsMacVO){
+		if (adminBoxsMacVO.getBoxId() == null){
+			return callback(CallbackMsg.PARAM_ERROR_CODE, "boxId为空","null");
+		}
+		if (StringUtils.isEmpty(adminBoxsMacVO.getMac())){
+			return callback(CallbackMsg.PARAM_ERROR_CODE, "mac地址为空", "null");
+		}
+		AdminBoxs adminBoxs = null;
+		AdminBoxs adminBoxsBack = null;
+		try {
+			adminBoxs = StringUtils.copyObject(adminBoxsMacVO, AdminBoxs.class);
+			adminBoxsBack = adminBoxsService.getOne(getQueryWrapper().setEntity(adminBoxs));
+		} catch (Exception e) {
+			logger.error("服务器出错", e.fillInStackTrace());
+		}
+		return adminBoxs;
+	}
 }

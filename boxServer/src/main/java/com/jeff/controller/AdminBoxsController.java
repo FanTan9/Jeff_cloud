@@ -31,6 +31,8 @@ public class AdminBoxsController {
 	@GetMapping(value = "/getByBoxId")
 	public String getByBoxId(@RequestParam("boxId") String boxId){
 		try{
+			System.out.println(111);
+			System.out.println(111);
 			Object object = redisTemplate.opsForValue().get(boxId);
 			if (object != null) {
 				return object.toString();

@@ -1,7 +1,7 @@
 package com.jeff.service.rabbitService;
 
 import com.alibaba.fastjson.JSON;
-import com.google.gson.JsonSyntaxException;
+import com.alibaba.fastjson.JSONException;
 import com.jeff.pojo.SceneMsg;
 import com.jeff.pojo.adminBoxs.AdminBoxs;
 import com.jeff.service.adminBoxs.IAdminBoxsService;
@@ -52,7 +52,7 @@ public class RabbitReceiver {
             if(bool == true){
                 logger.info("消息修改成功:" + msg);
             }
-        } catch (JsonSyntaxException | NumberFormatException e){
+        } catch (JSONException | NumberFormatException e){
             logger.error("格式错误:" + msg);
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());
@@ -73,7 +73,7 @@ public class RabbitReceiver {
             SceneMsg sceneMsg = JSON.parseObject(msg, SceneMsg.class);
             //boolean bool = this.saveScenMsg(sceneMsg);
             boolean bool = this.saveScenMsg(sceneMsg.getBoxId(), msg);
-        } catch (JsonSyntaxException | NumberFormatException e){
+        } catch (JSONException | NumberFormatException e){
             logger.error("格式错误:" + msg, e.getMessage());
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());

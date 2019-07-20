@@ -1,6 +1,6 @@
 package com.jeff.service.rabbitService;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson.JSON;
 import com.google.gson.JsonSyntaxException;
 import com.jeff.pojo.SceneMsg;
 import com.jeff.pojo.adminBoxs.AdminBoxs;
@@ -47,7 +47,7 @@ public class RabbitReceiver {
         try{
             msg = new String(messageBody);
             logger.info("监听到消息:" + msg);
-            AdminBoxs adminBoxs = new Gson().fromJson(msg, AdminBoxs.class);
+            AdminBoxs adminBoxs = JSON.parseObject(msg, AdminBoxs.class);
             boolean bool = this.saveMessage(adminBoxs);
             if(bool == true){
                 logger.info("消息修改成功:" + msg);
@@ -70,7 +70,7 @@ public class RabbitReceiver {
         try{
             msg = new String(messageBody);
             logger.info("监听到消息:" + msg);
-            SceneMsg sceneMsg = new Gson().fromJson(msg, SceneMsg.class);
+            SceneMsg sceneMsg = JSON.parseObject(msg, SceneMsg.class);
             //boolean bool = this.saveScenMsg(sceneMsg);
             boolean bool = this.saveScenMsg(sceneMsg.getBoxId(), msg);
         } catch (JsonSyntaxException | NumberFormatException e){

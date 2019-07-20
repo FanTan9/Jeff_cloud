@@ -63,14 +63,21 @@ public class AdminBoxsController extends CommonController {
 		if (StringUtils.isEmpty(adminBoxsMacVO.getMac())){
 			return callback(CallbackMsg.PARAM_ERROR_CODE, "mac地址为空", "null");
 		}
+		/*if (Patterns.patternMac(adminBoxsMacVO.getMac().trim()) == false){
+			return callback(CallbackMsg.PARAM_ERROR_CODE, "mac地址格式或大小写错误", "null");
+		}*/
 		AdminBoxs adminBoxs = null;
 		AdminBoxs adminBoxsBack = null;
 		try {
 			adminBoxs = StringUtils.copyObject(adminBoxsMacVO, AdminBoxs.class);
 			adminBoxsBack = adminBoxsService.getOne(getQueryWrapper().setEntity(adminBoxs));
+			if(adminBoxsBack != null){
+				return callback(CallbackMsg.SUCCESS_CODE, CallbackMsg.SUCCESS_MSG, StringUtils.copyObject(adminBoxsBack, AdminBoxsMacVO.class));
+			}
+			return callback(CallbackMsg.GENERAL_ERROR_CODE, "mac地址或boxId不存在", null);
 		} catch (Exception e) {
 			logger.error("服务器出错", e.fillInStackTrace());
+			return callback(CallbackMsg.UNKNOWN_ERROR_CODE, CallbackMsg.UNKNOWN_ERROR_MSG, null);
 		}
-		return adminBoxs;
 	}
 }

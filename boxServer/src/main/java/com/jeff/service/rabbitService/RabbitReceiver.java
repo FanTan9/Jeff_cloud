@@ -50,10 +50,10 @@ public class RabbitReceiver {
             AdminBoxs adminBoxs = JSON.parseObject(msg, AdminBoxs.class);
             boolean bool = this.saveMessage(adminBoxs);
             if(bool == true){
-                logger.info("消息修改成功:" + msg);
+                logger.info("消息修改成功:{}" , msg);
             }
         } catch (JSONException | NumberFormatException e){
-            logger.error("格式错误:" + msg);
+            logger.error("格式错误:{}" , msg);
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());
         }
@@ -74,7 +74,7 @@ public class RabbitReceiver {
             //boolean bool = this.saveScenMsg(sceneMsg);
             boolean bool = this.saveScenMsg(sceneMsg.getBoxId(), msg);
         } catch (JSONException | NumberFormatException e){
-            logger.error("格式错误:" + msg, e.getMessage());
+            logger.error("格式错误:{}" , msg, e.getMessage());
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());
         }

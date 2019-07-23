@@ -46,14 +46,14 @@ public class RabbitReceiver {
         String msg = "";
         try{
             msg = new String(messageBody);
-            logger.info("监听到消息:" + msg);
+            logger.info("监听到消息{}", msg);
             AdminBoxs adminBoxs = new Gson().fromJson(msg, AdminBoxs.class);
             boolean bool = this.saveMessage(adminBoxs);
             if(bool == true){
-                logger.info("消息修改成功:" + msg);
+                logger.info("消息修改成功{}", msg);
             }
         } catch (JsonSyntaxException | NumberFormatException e){
-            logger.error("格式错误:" + msg);
+            logger.error("格式错误{}", msg);
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());
         }
@@ -69,12 +69,12 @@ public class RabbitReceiver {
         String msg = "";
         try{
             msg = new String(messageBody);
-            logger.info("监听到消息:" + msg);
+            logger.info("监听到消息{}", msg);
             SceneMsg sceneMsg = new Gson().fromJson(msg, SceneMsg.class);
             //boolean bool = this.saveScenMsg(sceneMsg);
             boolean bool = this.saveScenMsg(sceneMsg.getBoxId(), msg);
         } catch (JsonSyntaxException | NumberFormatException e){
-            logger.error("格式错误:" + msg, e.getMessage());
+            logger.error("格式错误{}", msg);
         } catch (Exception e){
             logger.error("监听消息出现异常", e.fillInStackTrace());
         }

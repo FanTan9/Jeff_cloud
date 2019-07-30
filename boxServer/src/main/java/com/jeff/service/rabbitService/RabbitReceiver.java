@@ -46,7 +46,7 @@ public class RabbitReceiver {
         String msg = "";
         try{
             msg = new String(messageBody);
-            logger.info("监听到消息:" + msg);
+            logger.info("监听到消息:{}", msg);
             AdminBoxs adminBoxs = JSON.parseObject(msg, AdminBoxs.class);
             boolean bool = this.saveMessage(adminBoxs);
             if(bool == true){
@@ -69,7 +69,7 @@ public class RabbitReceiver {
         String msg = "";
         try{
             msg = new String(messageBody);
-            logger.info("监听到消息:" + msg);
+            logger.info("监听到消息:{}", msg);
             SceneMsg sceneMsg = JSON.parseObject(msg, SceneMsg.class);
             //boolean bool = this.saveScenMsg(sceneMsg);
             boolean bool = this.saveScenMsg(sceneMsg.getBoxId(), msg);
@@ -83,7 +83,7 @@ public class RabbitReceiver {
     /***
      * 将消息存入数据库
      */
-    private boolean saveMessage(AdminBoxs adminBoxs){
+    private boolean saveMessage(AdminBoxs adminBoxs) throws Exception{
         Boolean bool = adminBoxsService.updateById(adminBoxs);
         return bool;
     }
@@ -92,7 +92,7 @@ public class RabbitReceiver {
      * @Description: 将消息写入到redis中
      * @param：SceneMsg
      */
-    private boolean saveScenMsg(SceneMsg sceneMsg){
+    private boolean saveScenMsg(SceneMsg sceneMsg) throws Exception{
         redisUtils.put(sceneMsg.getBoxId(), sceneMsg.toString());
         boolean bool = StringUtils.equals(sceneMsg.toString()
                 , redisUtils.get(sceneMsg.getBoxId()).toString());
@@ -104,7 +104,7 @@ public class RabbitReceiver {
      * @param boxId，msg
      * @return
      */
-    private boolean saveScenMsg(String boxId, String msg){
+    private boolean saveScenMsg(String boxId, String msg) throws Exception{
         redisUtils.put(boxId, msg);
         boolean bool = StringUtils.equals(msg
                 , redisUtils.get(boxId).toString());

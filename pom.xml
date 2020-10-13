@@ -28,7 +28,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <devtools.version>2.0.9.RELEASE</devtools.version>
         <logback.version>1.2.3</logback.version>
         <gson.version>2.8.5</gson.version>
